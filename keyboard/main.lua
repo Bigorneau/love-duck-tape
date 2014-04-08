@@ -2,6 +2,10 @@ local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
 local point = {width / 2, height / 2}
 
+function love.load()
+	love.keyboard.setKeyRepeat(true)
+end
+
 function love.draw()
 	love.graphics.point(point[1], point[2])
 end
