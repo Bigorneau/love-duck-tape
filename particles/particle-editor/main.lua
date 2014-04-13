@@ -23,12 +23,12 @@ local configTable = {
   { name = "radial acceleration", value = 0, key = "n", step = math.pi / 6, mod = 2 * math.pi},
   { name = "image rotation min", value = 0, key = "o", step = math.pi / 6, mod = 2 * math.pi},
   { name = "image rotation max", value = 0, key = "p", step = math.pi / 6, mod = 2 * math.pi},
-  { name = "size variation", value = 0, key = "q", step = 1, mod = 1},
+  { name = "size variation", value = 0, key = "q", step = 1, mod = 2},
   { name = "speed min", value = 0, key = "r", step = 1},
   { name = "speed max", value = 0, key = "s", step = 1},
   { name = "spin min", value = 0, key = "t", step = math.pi / 6, mod = 2 * math.pi},
   { name = "spin max", value = 0, key = "u", step = math.pi / 6, mod = 2 * math.pi},
-  { name = "spin variation", value = 0, key = "v", step = 1, mod = 1},
+  { name = "spin variation", value = 0, key = "v", step = 1, mod = 2},
   { name = "spread", value = 0, key = "w", step = 1},
   { name = "tangential acceleration", value = 0, key = "x", step = "1"},
 }
@@ -61,7 +61,6 @@ setmetatable(config, metas)
 
 function applyConfig()
   local c = config
-  system:stop()
   system:setPosition(c.position_x, c.position_y)
   system:setAreaSpread("normal", c.area_spread_xmax, c.area_spread_ymax)
   system:setBufferSize(c.buffer_size)
@@ -84,6 +83,7 @@ function applyConfig()
   system:setSpread(c.spread)
   system:setTangentialAcceleration(c.tangential_acceleration)
   -- setTexture()
+  system:stop()
 end
 
 function love.load()
@@ -121,8 +121,8 @@ end
 function love.update(delta)
   readInputs()
   applyConfig()
-  --local x, y = love.mouse.getPosition()
-  --system:setPosition(x, y)
+  local x, y = love.mouse.getPosition()
+  system:setPosition(x, y)
   system:start()
   system:update(delta)
 end
