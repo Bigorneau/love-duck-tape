@@ -2,33 +2,12 @@ local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
 local point = {width / 2, height / 2}
 
-local displayedtext = "Move !"
-local text = ""
-
 function love.load()
 	love.keyboard.setKeyRepeat(true)
 end
 
-function love.keypressed(key, isrepeat)
-	if key == "return" and not isrepeat then
-		if love.keyboard.hasTextInput() then
-			displayedtext = text
-			text = ""
-			love.keyboard.setTextInput(false)
-		else
-			love.keyboard.setTextInput(true)
-		end
-	end
-end
-
-function love.textinput(t)
-	text = text .. t
-end
-
 function love.draw()
 	love.graphics.point(point[1], point[2])
-
-	love.graphics.print(displayedtext, width / 2, (height / 2) - 30)
 end
 
 function love.update(dt)
